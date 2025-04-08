@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inventario">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inventario"
+            style="@style/cabecera"/>
+        <EditText
+            android:id="@+id/etCodBarra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="Código de barras o código de artículo"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <EditText
+                android:id="@+id/etCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cantidad"
+                android:inputType="numberDecimal"
+                android:layout_weight="1"
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp"/>
+            <CheckBox
+                android:id="@+id/cbCantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Cantidad"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20sp"
+            android:background="@color/textoClaro">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalles del artículo"
+                style="@style/cabeceraTabla"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Descripción:"
+                    android:gravity="end|center_vertical"
+                    style="@style/textoTabla"/>
+                <TextView
+                    android:id="@+id/tvDescArticulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    style="@style/textoTabla"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Min. Unidad:"
+                    android:gravity="end|center_vertical"
+                    style="@style/textoTabla"/>
+                <TextView
+                    android:id="@+id/tvUnidadMedida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    style="@style/textoTabla"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btConfirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="Confirmar"/>
+            <Button
+                android:id="@+id/btCancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="Cancelar"/>
+
+            <ImageButton
+                android:id="@+id/ibtEliminar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/fondoFooter"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_baseline_delete_forever_24"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20sp"
+            android:background="@color/textoClaro">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registro del día"
+                style="@style/titulo2"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Código"
+                    style="@style/cabeceraSubTabla"/>
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Descripción"
+                    android:gravity="start|center_vertical"
+                    style="@style/cabeceraSubTabla"/>
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad"
+                    android:gravity="end|center_vertical"
+                    style="@style/cabeceraSubTabla"/>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/lvRegistros"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <EditText
+                android:id="@+id/etAccionInv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

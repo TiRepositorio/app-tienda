@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText,Autofill">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/fondo"
+        tools:ignore="UselessParent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/verdeApolo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            android:text="INVENTARIO" />
+        <EditText
+            android:id="@+id/etUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Usuario"
+            android:textSize="16sp"
+            android:inputType="textCapWords"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:textSize="16sp"
+            android:inputType="textPassword"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
+        <EditText
+            android:id="@+id/accion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:inputType="none"
+            tools:ignore="LabelFor" />
+        <Button
+            android:id="@+id/btIngresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="INGRESAR" />
+    </LinearLayout>
+
+</LinearLayout>
