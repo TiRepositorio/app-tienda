@@ -5,8 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondoOscuro"
-    tools:context=".utilidades.Sincronizacion">
+    tools:context=".old.utilidades.Sincronizacion">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,8 +56,7 @@
                 android:id="@+id/tvImei"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="@color/textoClaro"/>
+                android:layout_weight="1" />
 
         </LinearLayout>
 

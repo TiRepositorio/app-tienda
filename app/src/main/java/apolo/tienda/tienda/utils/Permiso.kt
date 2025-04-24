@@ -1,0 +1,10 @@
+package apolo.tienda.tienda.utils
+
+enum class Permiso(val value: String) {
+    CARGAR_INV("PERMITE_CARGAR_INV"),
+    CREAR_INV("PERMITE_CREAR_INV"),
+    CERRAR_INV("PERMITE_CERRAR_INV"),
+    VER_INV("PERMITE_VER_INV"),
+    ELIMINAR_DET("PERMITE_ELIMINAR_DET"),
+    MODIFICAR_DET("PERMITE_MODIFICAR_DET")
+}

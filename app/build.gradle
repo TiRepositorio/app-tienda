@@ -1,11 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
 }
 
 android {
-    compileSdkVersion 30
+
+    namespace 'apolo.tienda.tienda' // este es el nombre de tu paquete
+
+
+    compileSdkVersion 35
     buildToolsVersion "30.0.2"
 
     /*signingConfigs {
@@ -20,8 +23,8 @@ android {
 
     defaultConfig {
         applicationId "apolo.tienda.tienda"
-        minSdkVersion 17
-        targetSdkVersion 30
+        minSdkVersion 26
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
@@ -34,24 +37,55 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    viewBinding {
+        enabled = true
+    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    implementation files('libs\\ojdbc14_2.jar')
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+
+    implementation "androidx.activity:activity-ktx:1.10.1"
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    // Gson Converter (para convertir JSON automático)
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // OkHttp (Cliente HTTP)
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+
+    // OkHttp Logging (Para ver los logs de las peticiones)
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+
+    // Lifecycle ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
+
+    // Kotlin Extensions para LiveData
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
+
+    implementation "androidx.fragment:fragment-ktx:1.8.6"
+
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+
+
+
+
 }

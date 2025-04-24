@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="tial">#00574B</color>
-    <color name="verdeApolo">#85C229</color>
-    <color name="verdeApoloCabecera">#CC85C229</color>
-    <color name="fondoOscuro">#08080C</color>
-    <color name="textoClaro">#CCCCCC</color>
-    <color name="textoClaroHint">#242424</color>
-    <color name="textoHint">#242424</color>
-    <color name="fondoCabecera">#0F3502</color>
-    <color name="fondoFooter">#6B0000</color>
-    <color name="verdeOscuro">#193700</color>
-    <color name="azulMarino">#00055C</color>
-    <color name="quantum_deeporange900">#CD6B00</color>
-    <color name="grisTab">#757575</color>
-    <color name="verdeTab">#116600</color>
-    <color name="etDeshabilitado">#B8B8B8</color>
-    <color name="tvTitulo2">#759F63</color>
+<!---
+    <color name="primaryColor">#008577</color>
+    <color name="primaryDarkColor">#00574B</color>
+    <color name="accentColor">#D81B60</color>
+
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="backgroundHome">#F6F7F9</color>
+
+
+    <color name="primaryColor">#00796B</color>
+    <color name="primaryDarkColor">#004D40</color>
+    <color name="accentColor">#009688</color>
+    <color name="backgroundHome">#F5F5F5</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="white">#FFFFFF</color>
+    <color name="hintGray">#BDBDBD</color>
+    <color name="backgroundColor">#F5F5F5</color>
+    !-->
+
+    <color name="primaryColor">#1976D2</color>          <!-- Azul medio vibrante -->
+    <color name="primaryDarkColor">#0D47A1</color>      <!-- Azul oscuro profundo -->
+    <color name="accentColor">#4FC3F7</color>           <!-- Celeste suave / acento -->
+    <color name="backgroundHome">#F0F4F8</color>        <!-- Fondo muy suave, casi blanco -->
+    <color name="textPrimary">#212121</color>           <!-- Gris oscuro para texto -->
+    <color name="textSecondary">#757575</color>         <!-- Gris medio para textos secundarios -->
+    <color name="buttonColor">#2196F3</color>           <!-- Azul botón más claro -->
+    <color name="white">#FFFFFF</color>
+    <color name="backgroundColor">#F5F5F5</color>
+
+
+
 </resources>

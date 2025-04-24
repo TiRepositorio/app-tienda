@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/backgroundHome"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/tvNroInventario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inventario Nro.:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cargar Producto"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp"
+            android:textColor="@android:color/black" />
+
+        <!-- Código de barras -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código de barras"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCodigoBarra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionDone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Código de artículo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código de artículo"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCodigoArticulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionDone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Descripción del producto -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción del producto"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"/>
+        <TextView
+            android:id="@+id/tvDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(sin descripción aún)"
+            android:textStyle="italic"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp"/>
+
+        <!-- Unidad de medida -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Unidad de medida"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+        <Spinner
+            android:id="@+id/spUnidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <!-- Cantidad -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cantidad"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/primaryColor"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

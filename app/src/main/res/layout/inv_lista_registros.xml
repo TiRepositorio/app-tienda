@@ -10,8 +10,7 @@
         android:id="@+id/tv1"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:text="Código"
-        style="@style/textoTabla"/>
+        android:text="Código" />
     <TextView
         android:id="@+id/tv2"
         android:layout_width="match_parent"
@@ -19,14 +18,12 @@
         android:layout_weight="1"
         android:text="Descripción"
         android:maxLines="1"
-        android:gravity="start|center_vertical"
-        style="@style/textoTabla"/>
+        android:gravity="start|center_vertical" />
     <TextView
         android:id="@+id/tv3"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:text="Cantidad"
-        android:gravity="end|center_vertical"
-        style="@style/textoTabla"/>
+        android:gravity="end|center_vertical" />
 
 </LinearLayout>

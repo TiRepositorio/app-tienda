@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inventario">
+    tools:context=".old.Inventario">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,8 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Inventario"
-            style="@style/cabecera"/>
+            android:text="Inventario" />
         <EditText
             android:id="@+id/etCodBarra"
             android:layout_width="match_parent"
@@ -52,13 +51,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="20sp"
-            android:background="@color/textoClaro">
+            android:layout_margin="20sp" >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detalles del artículo"
-                style="@style/cabeceraTabla"/>
+                android:text="Detalles del artículo" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,15 +65,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="Descripción:"
-                    android:gravity="end|center_vertical"
-                    style="@style/textoTabla"/>
+                    android:gravity="end|center_vertical" />
                 <TextView
                     android:id="@+id/tvDescArticulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    style="@style/textoTabla"/>
+                    android:gravity="start|center_vertical" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,15 +82,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="Min. Unidad:"
-                    android:gravity="end|center_vertical"
-                    style="@style/textoTabla"/>
+                    android:gravity="end|center_vertical" />
                 <TextView
                     android:id="@+id/tvUnidadMedida"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="start|center_vertical"
-                    style="@style/textoTabla"/>
+                    android:gravity="start|center_vertical" />
             </LinearLayout>
 
         </LinearLayout>
@@ -127,7 +120,6 @@
                 android:id="@+id/ibtEliminar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/fondoFooter"
                 android:layout_margin="5dp"
                 android:src="@drawable/ic_baseline_delete_forever_24"/>
 
@@ -137,13 +129,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="20sp"
-            android:background="@color/textoClaro">
+            android:layout_margin="20sp" >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registro del día"
-                style="@style/titulo2"/>
+                android:text="Registro del día" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,23 +142,20 @@
                     android:id="@+id/tv1"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Código"
-                    style="@style/cabeceraSubTabla"/>
+                    android:text="Código" />
                 <TextView
                     android:id="@+id/tv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Descripción"
-                    android:gravity="start|center_vertical"
-                    style="@style/cabeceraSubTabla"/>
+                    android:gravity="start|center_vertical" />
                 <TextView
                     android:id="@+id/tv3"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="Cantidad"
-                    android:gravity="end|center_vertical"
-                    style="@style/cabeceraSubTabla"/>
+                    android:gravity="end|center_vertical" />
             </LinearLayout>
             <ListView
                 android:id="@+id/lvRegistros"

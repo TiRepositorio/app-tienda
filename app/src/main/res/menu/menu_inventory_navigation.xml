@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_cargar"
+        android:icon="@drawable/ic_cargar"
+        android:title="Cargar"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/nav_detalle"
+        android:icon="@drawable/ic_detalle"
+        android:title="Detalle"
+        app:showAsAction="ifRoom"/>
+
+    <!--
+    <item
+        android:id="@+id/nav_cerrar"
+        android:icon="@drawable/ic_cerrar"
+        android:title="Cerrar"
+        app:showAsAction="ifRoom"/>
+    !-->
+
+</menu>
