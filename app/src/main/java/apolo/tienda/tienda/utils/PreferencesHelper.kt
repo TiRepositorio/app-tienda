@@ -17,6 +17,9 @@ class PreferencesHelper private constructor(context: Context) {
     private val KEY_DESC_SUCURSAL = "desc_sucursal"
     private val KEY_USER_PERMISOS = "user_permisos"
     private val KEY_USER = "user"
+    private val KEY_ID_DISPOSITIVO = "id_dispositivo"
+    private val KEY_OFFLINE = "offline"
+    private val KEY_UUID = "uuid"
 
 
     private val prefs: SharedPreferences =
@@ -120,5 +123,29 @@ class PreferencesHelper private constructor(context: Context) {
         return prefs.getString(KEY_USER, null)
     }
 
+    fun saveIdDispositivo(idDispositivo: String) {
+        prefs.edit { putString(KEY_ID_DISPOSITIVO, idDispositivo) }
+    }
+
+    fun getIdDispositivo(): String {
+        return prefs.getString(KEY_ID_DISPOSITIVO, "").orEmpty()
+    }
+
+
+    fun saveOffline(offline: Boolean) {
+        prefs.edit { putBoolean(KEY_OFFLINE, offline) }
+    }
+
+    fun getOffline(): Boolean {
+        return prefs.getBoolean(KEY_OFFLINE, false)
+    }
+
+    fun saveUUID(ip: String) {
+        prefs.edit { putString(KEY_UUID, ip) }
+    }
+
+    fun getUUID(): String {
+        return prefs.getString(KEY_UUID, "").orEmpty()
+    }
 
 }

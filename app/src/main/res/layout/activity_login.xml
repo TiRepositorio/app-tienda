@@ -64,6 +64,17 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp" />
 
+
+            <!-- Botón Login -->
+            <Button
+                android:id="@+id/btnImportarDatos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Importar Datos"
+                android:backgroundTint="@color/primaryColor"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp" />
+
         </LinearLayout>
     </ScrollView>
 

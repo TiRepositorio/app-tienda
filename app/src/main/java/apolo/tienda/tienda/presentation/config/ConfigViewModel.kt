@@ -15,15 +15,28 @@ class ConfigViewModel(
         return android.util.Patterns.IP_ADDRESS.matcher(ip).matches()
     }
 
-    fun saveIp(ip: String) {
-        preferencesHelper.saveBackendIp(ip)
-    }
 
     fun getSavedPort(): String {
         return preferencesHelper.getBackendPort()
     }
 
+    fun getSavedIdDispositivo(): String {
+        return preferencesHelper.getIdDispositivo()
+    }
+
+    fun getSavedUUID(): String {
+        return preferencesHelper.getUUID()
+    }
+
+    fun saveIp(ip: String) {
+        preferencesHelper.saveBackendIp(ip)
+    }
+
     fun savePort(port: String) {
         preferencesHelper.saveBackendPort(port)
+    }
+
+    fun saveIdDispotivio(idDispositivo: String) {
+        preferencesHelper.saveIdDispositivo(idDispositivo)
     }
 }

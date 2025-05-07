@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import apolo.tienda.tienda.R
@@ -17,6 +19,9 @@ import apolo.tienda.tienda.presentation.inventory.list.ListInventoryActivity
 import apolo.tienda.tienda.presentation.inventory.new.NewInventoryActivity
 import apolo.tienda.tienda.presentation.dialog.EmpresaSelectorDialogFragment
 import apolo.tienda.tienda.presentation.dialog.SucursalSelectorDialogFragment
+import apolo.tienda.tienda.presentation.importaciondatos.ImportarDatosActivity
+import apolo.tienda.tienda.presentation.offline.inventario.listar.ListarTomaInventariosActivity
+import apolo.tienda.tienda.presentation.offline.inventario.nuevo.NuevoInventarioActivity
 import apolo.tienda.tienda.presentation.state.UiState
 import apolo.tienda.tienda.utils.LoadingDialog
 import apolo.tienda.tienda.utils.Permiso
@@ -48,7 +53,12 @@ class HomeActivity : AppCompatActivity() {
 
 
     fun setupIni() {
-        viewModel.getUserConfig()
+        if (!PreferencesHelper.getInstance().getOffline()) {
+            viewModel.getUserConfig()
+        } else {
+            //configurar opciones despues de obtener los permisos del usuario
+            setupRecyclerViewLocal()
+        }
     }
 
     private fun setupObservers() {
@@ -89,14 +99,24 @@ class HomeActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun mostrarEmpresaSucursal() {
         val prefs = PreferencesHelper.getInstance()
-        binding.tvEmpresa.text = "${prefs.getCodEmpresa()} - ${prefs.getDescEmpresa()}"
-        binding.tvSucursal.text = "${prefs.getCodSucursal()} - ${prefs.getDescSucursal()}"
         binding.tvUsuario.text = "${prefs.getUsuario()}"
+
+        if(prefs.getOffline()) {
+            binding.tvEmpresa.visibility = View.GONE
+            binding.tvSucursal.visibility = View.GONE
+        } else {
+            binding.tvEmpresa.text = "${prefs.getCodEmpresa()} - ${prefs.getDescEmpresa()}"
+            binding.tvSucursal.text = "${prefs.getCodSucursal()} - ${prefs.getDescSucursal()}"
+        }
+
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        if(!PreferencesHelper.getInstance().getOffline()) {
+            menuInflater.inflate(R.menu.menu_main, menu)
+        }
         return true
     }
 
@@ -235,6 +255,59 @@ class HomeActivity : AppCompatActivity() {
                 "logout" -> finish()
             }
         }
+    }
+
+
+    private fun setupRecyclerViewLocal() {
+
+
+        val options = listOf(
+            HomeOption("Nueva Toma", R.drawable.ic_add, "new_inventory"),
+            HomeOption("Continuar Toma", R.drawable.ic_inventory, "load_inventory"),
+            HomeOption("Importar Datos", R.drawable.ic_importar, "importar_datos"),
+            HomeOption("Salir", R.drawable.ic_logout, "logout")
+        )
+
+        //startActivity(Intent(this, ImportarDatosActivity::class.java))
+
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = HomeAdapter(options) { option ->
+            //Toast.makeText(this, "Seleccionaste: ${option.title}", Toast.LENGTH_SHORT).show()
+            // Aca podés ir navegando a cada Activity correspondiente
+            when (option.id) {
+                "new_inventory" -> {
+
+                    startActivity(Intent(this, NuevoInventarioActivity::class.java))
+                }
+                "load_inventory" -> {
+
+                    startActivity(Intent(this, ListarTomaInventariosActivity::class.java))
+
+                }
+
+                "importar_datos" -> {
+
+                    startActivity(Intent(this, ImportarDatosActivity::class.java))
+
+                }
+
+                "logout" -> finish()
+            }
+        }
+    }
+
+
+    @Deprecated("Deprecated desde Android 13. Usar OnBackPressedDispatcher si es posible")
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirmar salida")
+            .setMessage("¿Estás seguro de que deseas salir de la aplicación?")
+            .setPositiveButton("Sí") { _, _ ->
+                super.onBackPressed() // Ahora se llama a super solo si el usuario confirma
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+
     }
 
 }

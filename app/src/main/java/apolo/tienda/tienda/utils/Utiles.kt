@@ -28,6 +28,11 @@ object DateUtils {
         return offsetDateTime.atZoneSameInstant(ZONA_APP)
     }
 
+    fun parseDateFromLocal(dateString: String): ZonedDateTime {
+        val localDateTime = LocalDateTime.parse(dateString) // porque es un ISO_LOCAL_DATE_TIME
+        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZONA_APP)
+    }
+
     fun formatDateToShow(date: ZonedDateTime, pattern: String = "dd/MM/yyyy HH:mm"): String {
         val formatter = DateTimeFormatter.ofPattern(pattern)
         return date.format(formatter)

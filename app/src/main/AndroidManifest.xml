@@ -22,20 +22,37 @@
         android:screenOrientation="portrait"
         tools:targetApi="m">
         <activity android:name=".presentation.login.LoginActivity"
-                  android:exported="true">
+                  android:exported="true"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.config.ConfigActivity" />
-        <activity android:name=".presentation.home.HomeActivity" />
-        <activity android:name=".presentation.inventory.new.NewInventoryActivity" />
-        <activity android:name=".presentation.inventory.list.ListInventoryActivity" />
-        <activity android:name=".presentation.inventory.load.InventoryLoadActivity" />
-        <activity android:name=".presentation.inventory.view.InventoryDetailActivity" />
-        <activity android:name=".presentation.inventory.main.InventoryMainActivity" />
+        <activity android:name=".presentation.config.ConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.home.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.inventory.new.NewInventoryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.inventory.list.ListInventoryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.inventory.load.InventoryLoadActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.inventory.view.InventoryDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.inventory.main.InventoryMainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.importaciondatos.ImportarDatosActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.offline.inventario.nuevo.NuevoInventarioActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".presentation.offline.inventario.cargar.CargarTomaInventarioActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".presentation.offline.inventario.listar.ListarTomaInventariosActivity"
+            android:screenOrientation="portrait" />
 
 
     </application>

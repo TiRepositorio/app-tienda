@@ -5,7 +5,9 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import apolo.tienda.tienda.data.local.response.ListaTomaInventarioResponse
 import apolo.tienda.tienda.data.remote.response.ListInventoryResponse
+import apolo.tienda.tienda.domain.model.InventarioLocal
 import apolo.tienda.tienda.domain.model.Inventory
 
 fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
@@ -43,3 +45,16 @@ fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: (T) -> Unit) {
     }
     observe(owner, wrapper)
 }
+
+
+fun ListaTomaInventarioResponse.toDomain(): InventarioLocal {
+    return InventarioLocal(
+        id = id,
+        nroAjuste = nroAjuste,
+        usuarioAlta = usuario,
+        estado = estado,
+        fechaInventario = fecha,
+        comentario = comentario
+    )
+}
+

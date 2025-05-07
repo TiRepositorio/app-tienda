@@ -3,6 +3,7 @@ package apolo.tienda.tienda.data.remote.repository
 import apolo.tienda.tienda.data.remote.api.InventoryApi
 import apolo.tienda.tienda.data.remote.request.CloseInventoryRequest
 import apolo.tienda.tienda.data.remote.request.DeleteDetInventoryRequest
+import apolo.tienda.tienda.data.remote.request.EnviarTomaInventarioRequest
 import apolo.tienda.tienda.data.remote.request.LoadInventoryRequest
 import apolo.tienda.tienda.data.remote.request.NewInventoryRequest
 import apolo.tienda.tienda.data.remote.request.UpdateDetInventoryRequest
@@ -10,6 +11,7 @@ import apolo.tienda.tienda.data.remote.response.CloseInventoryResponse
 import apolo.tienda.tienda.data.remote.response.DeleteDetInventoryResponse
 import apolo.tienda.tienda.data.remote.response.EmpresaResponse
 import apolo.tienda.tienda.data.remote.response.DetailInventoryResponse
+import apolo.tienda.tienda.data.remote.response.EnviarTomaInventarioResponse
 import apolo.tienda.tienda.data.remote.response.ListInventoryResponse
 import apolo.tienda.tienda.data.remote.response.LoadInventoryResponse
 import apolo.tienda.tienda.data.remote.response.NewInventoryResponse
@@ -32,7 +34,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener empresas"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -47,7 +50,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener sucursales"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -61,7 +65,8 @@ class InventoryRepositoryImpl(
             if (response.isSuccessful) {
                 response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
             } else {
-                Result.failure(Exception("Error al crear inventario"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -75,7 +80,8 @@ class InventoryRepositoryImpl(
             if (response.isSuccessful) {
                 response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
             } else {
-                Result.failure(Exception("Error al cargar inventario"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -89,7 +95,8 @@ class InventoryRepositoryImpl(
             if (response.isSuccessful) {
                 response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
             } else {
-                Result.failure(Exception("Error al cerrar el inventario"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -105,7 +112,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener listado de inventarios"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -122,7 +130,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener unidades de medida"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -137,7 +146,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener producto"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -154,7 +164,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener detalle de inventario"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -170,7 +181,8 @@ class InventoryRepositoryImpl(
                     Result.success(it)
                 } ?: Result.failure(Exception("Datos vacíos"))
             } else {
-                Result.failure(Exception("Error al obtener config del usuario"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -184,7 +196,8 @@ class InventoryRepositoryImpl(
             if (response.isSuccessful) {
                 response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
             } else {
-                Result.failure(Exception("Error al eliminar detalle"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -198,7 +211,22 @@ class InventoryRepositoryImpl(
             if (response.isSuccessful) {
                 response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
             } else {
-                Result.failure(Exception("Error al actualizar detalle"))
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun enviarTomaInventario(request: EnviarTomaInventarioRequest, idEquipo: String, uuid: String): Result<EnviarTomaInventarioResponse> {
+        return try {
+            val response = api.enviarTomaInventario(request, idEquipo, uuid)
+            if (response.isSuccessful) {
+                response.body()?.let { Result.success(it) } ?: Result.failure(Exception("Error de datos"))
+            } else {
+                val errorMsg = response.errorBody()?.string() ?: "Error desconocido"
+                Result.failure(Exception(errorMsg))
             }
         } catch (e: Exception) {
             Result.failure(e)

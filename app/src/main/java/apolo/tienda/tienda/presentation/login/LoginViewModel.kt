@@ -1,8 +1,11 @@
 package apolo.tienda.tienda.presentation.login
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import apolo.tienda.tienda.data.local.repository.AuthLocalRepositoryImpl
+import apolo.tienda.tienda.data.local.request.LoginLocalRequest
 import apolo.tienda.tienda.data.remote.repository.AuthRepositoryImpl
 import apolo.tienda.tienda.utils.PreferencesHelper
 import kotlinx.coroutines.launch
@@ -11,28 +14,49 @@ class LoginViewModel : ViewModel() {
 
     val loginState = MutableLiveData<LoginState>()
 
-    private lateinit var repository: AuthRepositoryImpl
+    private lateinit var remoteRepository: AuthRepositoryImpl
+    private lateinit var localRepository: AuthLocalRepositoryImpl
 
-    fun setRepository(repository: AuthRepositoryImpl) {
-        this.repository = repository
+    fun setRemoteRepository(repository: AuthRepositoryImpl) {
+        this.remoteRepository = repository
+    }
+
+    fun setLocalRepository(repository: AuthLocalRepositoryImpl) {
+        this.localRepository = repository
     }
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
             loginState.value = LoginState.Loading
 
-            val result = repository.login(username, password)
+            val result = remoteRepository.login(username, password)
 
             result.fold(
                 onSuccess = { response ->
-
-                    val prefs = PreferencesHelper.getInstance()
-                    prefs.saveToken(response.token)
-
+                    PreferencesHelper.getInstance().saveToken(response.token)
+                    PreferencesHelper.getInstance().saveUsuario(username)
                     loginState.value = LoginState.Success
                 },
                 onFailure = {
                     loginState.value = LoginState.Error(it.message ?: "Ocurrió un error")
+                }
+            )
+        }
+    }
+
+    fun loginLocal(username: String, password: String) {
+        viewModelScope.launch {
+            loginState.value = LoginState.Loading
+
+            val result = localRepository.login(LoginLocalRequest(username, password))
+
+            result.fold(
+                onSuccess = { response ->
+                    PreferencesHelper.getInstance().saveUsuario(response.codUsuario)
+                    loginState.value = LoginState.Success
+                },
+                onFailure = {
+                    loginState.value = LoginState.Error(it.message ?: "Error en login local")
                 }
             )
         }

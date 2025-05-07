@@ -2,6 +2,7 @@ package apolo.tienda.tienda.data.remote.api
 
 import apolo.tienda.tienda.data.remote.request.CloseInventoryRequest
 import apolo.tienda.tienda.data.remote.request.DeleteDetInventoryRequest
+import apolo.tienda.tienda.data.remote.request.EnviarTomaInventarioRequest
 import apolo.tienda.tienda.data.remote.request.LoadInventoryRequest
 import apolo.tienda.tienda.data.remote.request.NewInventoryRequest
 import apolo.tienda.tienda.data.remote.request.UpdateDetInventoryRequest
@@ -9,6 +10,7 @@ import apolo.tienda.tienda.data.remote.response.CloseInventoryResponse
 import apolo.tienda.tienda.data.remote.response.DeleteDetInventoryResponse
 import apolo.tienda.tienda.data.remote.response.EmpresaResponse
 import apolo.tienda.tienda.data.remote.response.DetailInventoryResponse
+import apolo.tienda.tienda.data.remote.response.EnviarTomaInventarioResponse
 import apolo.tienda.tienda.data.remote.response.ListInventoryResponse
 import apolo.tienda.tienda.data.remote.response.LoadInventoryResponse
 import apolo.tienda.tienda.data.remote.response.NewInventoryResponse
@@ -20,6 +22,7 @@ import apolo.tienda.tienda.data.remote.response.UserConfigResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -59,5 +62,13 @@ interface InventoryApi {
 
     @POST("inventory/update-det-inventory")
     suspend fun updateDetInventory(@Body request: UpdateDetInventoryRequest): Response<UpdateDetInventoryResponse>
+
+
+    //los jardines
+    @POST("inventario-lj/enviar")
+    suspend fun enviarTomaInventario(@Body request: EnviarTomaInventarioRequest,
+                                     @Header("id-equipo") deviceId: String,
+                                     @Header("uuid") usuario: String):
+                                    Response<EnviarTomaInventarioResponse>
 
 }

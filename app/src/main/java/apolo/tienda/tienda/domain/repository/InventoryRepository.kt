@@ -2,6 +2,7 @@ package apolo.tienda.tienda.domain.repository
 
 import apolo.tienda.tienda.data.remote.request.CloseInventoryRequest
 import apolo.tienda.tienda.data.remote.request.DeleteDetInventoryRequest
+import apolo.tienda.tienda.data.remote.request.EnviarTomaInventarioRequest
 import apolo.tienda.tienda.data.remote.request.LoadInventoryRequest
 import apolo.tienda.tienda.data.remote.request.NewInventoryRequest
 import apolo.tienda.tienda.data.remote.request.UpdateDetInventoryRequest
@@ -9,6 +10,7 @@ import apolo.tienda.tienda.data.remote.response.CloseInventoryResponse
 import apolo.tienda.tienda.data.remote.response.DeleteDetInventoryResponse
 import apolo.tienda.tienda.data.remote.response.EmpresaResponse
 import apolo.tienda.tienda.data.remote.response.DetailInventoryResponse
+import apolo.tienda.tienda.data.remote.response.EnviarTomaInventarioResponse
 import apolo.tienda.tienda.data.remote.response.ListInventoryResponse
 import apolo.tienda.tienda.data.remote.response.LoadInventoryResponse
 import apolo.tienda.tienda.data.remote.response.NewInventoryResponse
@@ -32,5 +34,8 @@ interface InventoryRepository {
     suspend fun deleteDetInventory(request: DeleteDetInventoryRequest): Result<DeleteDetInventoryResponse>
     suspend fun updateDetInventory(request: UpdateDetInventoryRequest): Result<UpdateDetInventoryResponse>
 
+
+    //los jardinesv
+    suspend fun enviarTomaInventario(request: EnviarTomaInventarioRequest, idEquipo: String, uuid: String): Result<EnviarTomaInventarioResponse>
 }
 
