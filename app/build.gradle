@@ -11,6 +11,20 @@ android {
     compileSdkVersion 35
     buildToolsVersion "30.0.2"
 
+    flavorDimensions "default"
+    productFlavors {
+        normal {
+            dimension "default"
+            applicationId "apolo.tienda.tienda"
+            versionNameSuffix "-normal"
+        }
+        grupo70 {
+            dimension "default"
+            applicationId "com.grupo70.inventario"
+            versionNameSuffix "-grupo70"
+        }
+    }
+
     /*signingConfigs {
         debug {
 
@@ -46,6 +60,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_21
         targetCompatibility JavaVersion.VERSION_21
     }
+
+
+
 
 }
 
