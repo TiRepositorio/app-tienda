@@ -24,6 +24,7 @@ import apolo.tienda.tienda.utils.showToast
 import android.view.KeyEvent
 import android.widget.LinearLayout
 import apolo.tienda.tienda.R
+import apolo.tienda.tienda.utils.DecimalDigitsInputFilter
 import com.google.android.material.button.MaterialButton
 
 class CargarFragment : Fragment() {
@@ -103,6 +104,8 @@ class CargarFragment : Fragment() {
         binding.etCantidad.setOnFocusChangeListener { _, hasFocus ->
             barraTeclado.visibility = if (hasFocus) View.VISIBLE else View.GONE
         }
+
+        binding.etCantidad.filters = arrayOf(DecimalDigitsInputFilter(10, 2))
 
         binding.etBuscadorProducto.setOnFocusChangeListener { _, hasFocus ->
             barraTeclado.visibility = if (hasFocus) View.GONE else View.VISIBLE
@@ -197,7 +200,19 @@ class CargarFragment : Fragment() {
 
 
             } else if (productos.size > 1) {
-                requireContext().showToast("Múltiples productos encontrados")
+                //requireContext().showToast("Múltiples productos encontrados")
+
+                val dialog = ProductoSelectorDialog(productos) { productoSeleccionado ->
+                    binding.etBuscadorProducto.setText("")
+                    binding.etCodigoArticulo.setText(productoSeleccionado.codProducto)
+                    binding.etCodigoBarra.setText(productoSeleccionado.codBarra)
+                    binding.tvDescripcion.text = productoSeleccionado.descProducto
+
+                    viewModel.setProductoSeleccionado(productoSeleccionado)
+
+                }
+                dialog.show(parentFragmentManager, "ProductoSelectorDialog")
+
             }
         }
 
@@ -225,6 +240,14 @@ class CargarFragment : Fragment() {
     }
 
     private fun guardarProducto() : Boolean {
+
+        val productos = viewModel.productosState.value
+
+        if (productos == null || productos.size != 1) {
+            requireContext().showToast("Debe seleccionar un único producto antes de guardar")
+            return false
+        }
+
         val producto = viewModel.productosState.value?.firstOrNull()
         val codArticulo = producto?.codProducto ?: run {
             requireContext().showToast("Debe ingresar un código de artículo válido")
@@ -232,9 +255,30 @@ class CargarFragment : Fragment() {
         }
 
 
-        val cantidad = binding.etCantidad.text.toString().toDoubleOrNull()
-        if (cantidad == null || cantidad == 0.toDouble()) {
-            requireContext().showToast("Debe completar correctamente los campos")
+        val cantidadTexto = binding.etCantidad.text.toString().trim()
+        if (cantidadTexto.isEmpty()) {
+            requireContext().showToast("Debe ingresar una cantidad")
+            return false
+        }
+
+        val cantidad = cantidadTexto.toDoubleOrNull()
+        if (cantidad == null || cantidad == 0.0) {
+            requireContext().showToast("Cantidad inválida")
+            return false
+        }
+
+        // Validación manual adicional (opcional, redundante con el InputFilter pero útil si el valor viene seteado por código)
+        val partes = cantidadTexto.split(".")
+        val enteros = partes[0]
+        val decimales = if (partes.size > 1) partes[1] else ""
+
+        if (enteros.length > 10) {
+            requireContext().showToast("Máximo 10 dígitos enteros permitidos")
+            return false
+        }
+
+        if (decimales.length > 2) {
+            requireContext().showToast("Máximo 2 decimales permitidos")
             return false
         }
 

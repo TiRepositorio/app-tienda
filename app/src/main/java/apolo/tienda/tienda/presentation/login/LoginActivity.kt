@@ -3,12 +3,19 @@ package apolo.tienda.tienda.presentation.login
 import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import apolo.tienda.tienda.data.local.api.AuthLocalApiImpl
 import apolo.tienda.tienda.data.local.repository.AuthLocalRepositoryImpl
+import apolo.tienda.tienda.data.remote.api.ActualizacionApi
+import apolo.tienda.tienda.data.remote.repository.ActualizacionRepositoryImpl
 import apolo.tienda.tienda.data.remote.repository.AuthRepositoryImpl
 import apolo.tienda.tienda.databinding.ActivityLoginBinding
 import apolo.tienda.tienda.di.NetworkModule
@@ -45,17 +52,25 @@ class LoginActivity : AppCompatActivity() {
         // ✅ Recién ahora creamos Retrofit, API y repositorio
         val retrofit = NetworkModule.provideRetrofit(getBackendUrl(), preferencesHelper)
         val api = NetworkModule.provideAuthApi(retrofit)
+        val apiActualizacion = NetworkModule.provideActualizacionApi(retrofit)
         val remoteRepository = AuthRepositoryImpl(api)
 
         val localApi = AuthLocalApiImpl()
         val localRepository = AuthLocalRepositoryImpl(localApi, applicationContext)
+        val actualizacionRepository = ActualizacionRepositoryImpl(apiActualizacion)
 
         viewModel.setRemoteRepository(remoteRepository)
         viewModel.setLocalRepository(localRepository)
+        viewModel.setActualizacionRepository(actualizacionRepository)
 
         setupListeners()
         setupObservers()
         setupPermissionHelper()
+
+        val versionName = applicationContext.packageManager
+            .getPackageInfo(applicationContext.packageName, 0).versionName
+
+        binding.tvVersionApp.text = "Versión $versionName"
     }
 
 
@@ -87,6 +102,14 @@ class LoginActivity : AppCompatActivity() {
             mostrarDialogConfiguracion()
             true
         }
+
+        binding.btnActualizarVersion.setOnClickListener {
+            if (puedeInstalarApks()) {
+                viewModel.descargarEInstalar(this)
+            } else {
+                solicitarPermisoInstalacion()
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -113,6 +136,32 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.estadoActualizacion.collect { estado ->
+                when (estado) {
+                    is ActualizacionState.Idle -> {
+                        // Nada por hacer
+                    }
+                    is ActualizacionState.Loading -> {
+                        binding.loadingOverlay.visibility = View.VISIBLE
+                    }
+                    is ActualizacionState.Success -> {
+                        binding.loadingOverlay.visibility = View.GONE
+                        showToast("Instalador descargado. Procediendo a instalar.")
+                    }
+                    is ActualizacionState.Error -> {
+                        binding.loadingOverlay.visibility = View.GONE
+                        showToast("Error al descargar: ${estado.mensaje}")
+                    }
+                }
+            }
+        }
+
+
+
     }
 
     private fun setupPermissionHelper() {
@@ -124,7 +173,9 @@ class LoginActivity : AppCompatActivity() {
                 Manifest.permission.INTERNET,
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.ACCESS_WIFI_STATE
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.REQUEST_INSTALL_PACKAGES
+
             )
         ).apply {
             onAllPermissionsGranted = {
@@ -169,6 +220,33 @@ class LoginActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionHelper.handlePermissionsResult(requestCode, grantResults)
     }
+
+
+    private fun puedeInstalarApks(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            packageManager.canRequestPackageInstalls()
+        } else {
+            true
+        }
+    }
+
+    private fun solicitarPermisoInstalacion() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                data = Uri.parse("package:$packageName")
+            }
+            startActivityForResult(intent, 1234)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1234 && puedeInstalarApks()) {
+            viewModel.descargarEInstalar(this)
+        }
+    }
+
 
 
 }

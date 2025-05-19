@@ -33,6 +33,10 @@ class CargarViewModel : ViewModel() {
     }
 
 
+    fun setProductoSeleccionado(producto: ListaProductoResponse) {
+        _productosState.value = listOf(producto)
+    }
+
 
     fun getProductos(context: Context, filtro: String, nroAjuste: String ) {
         viewModelScope.launch {

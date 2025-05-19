@@ -1,5 +1,6 @@
 package apolo.tienda.tienda.di
 
+import apolo.tienda.tienda.data.remote.api.ActualizacionApi
 import apolo.tienda.tienda.data.remote.api.AuthApi
 import apolo.tienda.tienda.data.remote.api.InventoryApi
 import apolo.tienda.tienda.data.remote.interceptor.AuthInterceptor
@@ -29,4 +30,7 @@ object NetworkModule {
 
     fun provideInventoryApi(retrofit: Retrofit): InventoryApi =
         retrofit.create(InventoryApi::class.java)
+
+    fun provideActualizacionApi(retrofit: Retrofit): ActualizacionApi =
+        retrofit.create(ActualizacionApi::class.java)
 }

@@ -22,8 +22,8 @@ class DetalleAdapter (
 
         fun bind(item: ListaDetalleTomaInventarioResponse) {
             binding.tvDescripcion.text = item.descProducto
-            binding.tvCantidad.text = "${item.cantidad}"
-            //binding.tvCodigoArticulo.text = "${item.codProducto}"
+            //binding.tvCantidad.text = "${item.cantidad}"
+            binding.tvCodigoArticulo.text = "${item.codProducto}"
             val formato = NumberFormat.getNumberInstance(Locale.getDefault())
             formato.minimumFractionDigits = 2
             formato.maximumFractionDigits = 2

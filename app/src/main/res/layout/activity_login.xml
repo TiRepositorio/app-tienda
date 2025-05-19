@@ -64,8 +64,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp" />
 
-
-            <!-- Botón Login -->
+            <!-- Botón Importar Datos -->
             <Button
                 android:id="@+id/btnImportarDatos"
                 android:layout_width="match_parent"
@@ -75,9 +74,30 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp" />
 
+            <!-- ✅ NUEVO Botón Actualizar Versión -->
+            <Button
+                android:id="@+id/btnActualizarVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Actualizar Versión"
+                android:backgroundTint="@color/primaryColor"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <!-- ✅ NUEVO TextView Versión actual -->
+            <TextView
+                android:id="@+id/tvVersionApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Versión 1.0"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp" />
+
         </LinearLayout>
     </ScrollView>
-
 
     <FrameLayout
         android:id="@+id/loadingOverlay"
@@ -88,11 +108,11 @@
         android:clickable="true"
         android:focusable="true">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_gravity="center"/>
-</FrameLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
