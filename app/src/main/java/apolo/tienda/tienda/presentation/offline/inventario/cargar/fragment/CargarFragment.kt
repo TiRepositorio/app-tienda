@@ -26,6 +26,8 @@ import android.widget.LinearLayout
 import apolo.tienda.tienda.R
 import apolo.tienda.tienda.utils.DecimalDigitsInputFilter
 import com.google.android.material.button.MaterialButton
+import com.journeyapps.barcodescanner.ScanOptions
+import com.journeyapps.barcodescanner.ScanContract
 
 class CargarFragment : Fragment() {
 
@@ -38,6 +40,13 @@ class CargarFragment : Fragment() {
 
     private val sharedViewModel: SharedCargarTomaInventarioViewModel by activityViewModels()
     private val viewModel: CargarViewModel by activityViewModels()
+
+    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
+        if (result.contents != null) {
+            binding.etBuscadorProducto.setText(result.contents)
+            viewModel.getProductos(requireContext(), result.contents, inventario.nroAjuste.toString())
+        }
+    }
 
     var ignorarSiguienteVacioProducto = false
 
@@ -154,6 +163,17 @@ class CargarFragment : Fragment() {
 
         binding.btnGuardar.setOnClickListener {
             guardarProducto()
+        }
+
+
+        binding.etBuscadorProductoLayout.setEndIconOnClickListener {
+            val options = ScanOptions().apply {
+                setPrompt("Escanea un código")
+                setBeepEnabled(true)
+                setOrientationLocked(true)
+                setBarcodeImageEnabled(true)
+            }
+            barcodeLauncher.launch(options)
         }
 
 

@@ -28,11 +28,15 @@
 
             <!-- BUSCADOR -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etBuscadorProductoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Buscador de Productos"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxBackgroundMode="outline"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_barcode_24"
+                app:endIconContentDescription="Escanear"
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -47,6 +51,7 @@
                     android:cursorVisible="true"
                     android:imeOptions="actionDone" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Código de barras -->
             <com.google.android.material.textfield.TextInputLayout

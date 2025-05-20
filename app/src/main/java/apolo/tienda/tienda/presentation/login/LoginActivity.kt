@@ -174,7 +174,8 @@ class LoginActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.REQUEST_INSTALL_PACKAGES
+                Manifest.permission.REQUEST_INSTALL_PACKAGES,
+                Manifest.permission.CAMERA
 
             )
         ).apply {
