@@ -8,7 +8,8 @@ class DecimalDigitsInputFilter(
     private val maxDigitsAfterDecimal: Int
 ) : InputFilter {
 
-    private val regex = Regex("^\\d{0,$maxDigitsBeforeDecimal}(\\.\\d{0,$maxDigitsAfterDecimal})?\$")
+    private val regex = Regex("^-?\\d{0,$maxDigitsBeforeDecimal}(\\.\\d{0,$maxDigitsAfterDecimal})?\$")
+
 
     override fun filter(
         source: CharSequence?,
